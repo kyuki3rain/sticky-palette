@@ -10,25 +10,29 @@
     "format": "rome format src",
     "lint": "rome check src",
     "ci": "rome ci src",
-    "test": "jest"
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.4.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "@vitest/coverage-c8": "^0.29.3",
     "autoprefixer": "^10.4.14",
-    "jest": "^29.5.0",
+    "jsdom": "^21.1.1",
     "postcss": "^8.4.21",
     "rome": "^11.0.0",
     "tailwindcss": "^3.2.7",
-    "ts-jest": "^29.0.5",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
-    "vite-tsconfig-paths": "^4.0.7"
+    "vite-tsconfig-paths": "^4.0.7",
+    "vitest": "^0.29.3"
   }
 }
