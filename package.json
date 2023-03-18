@@ -11,7 +11,8 @@
     "lint": "rome check src",
     "ci": "rome ci src",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "gen:schema": "supabase gen types typescript --linked > ./src/lib/schema.ts && rome format ./src/lib/schema.ts --write"
   },
   "dependencies": {
     "@supabase/auth-helpers-react": "^0.3.1",
