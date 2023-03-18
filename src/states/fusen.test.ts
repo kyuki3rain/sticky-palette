@@ -1,3 +1,4 @@
+import { createFusen } from '@/types/fusen';
 import { renderHook, act } from '@testing-library/react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import {
@@ -13,9 +14,9 @@ describe('fusen test', () => {
 	const { result: setFusens } = renderHook(() => useSetAtom(setFusensAtom));
 	const { result: resetFusen } = renderHook(() => useSetAtom(resetFusenAtom));
 
-	const test1 = { id: 'test1', title: 'test1', content: 'test1', position: { x: 0, y: 0 } };
-	const test2 = { id: 'test2', title: 'test2', content: 'test2', position: { x: 0, y: 0 } };
-	const test3 = { id: test1.id, title: 'test3', content: 'test3', position: { x: 0, y: 0 } };
+	const test1 = createFusen({ id: 'test1', title: 'test1', content: 'test1', x: 0, y: 0 });
+	const test2 = createFusen({ id: 'test2', title: 'test2', content: 'test2', x: 0, y: 0 });
+	const test3 = createFusen({ id: test1.id, title: 'test3', content: 'test3', x: 0, y: 0 });
 
 	const getFusenIds = () => renderHook(() => useAtomValue(getFusenIdsAtom)).result;
 	const getFusen = (id: string) => renderHook(() => useAtomValue(getFusenAtom(id))).result;
