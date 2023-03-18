@@ -1,9 +1,16 @@
 import { renderHook, act } from '@testing-library/react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { getFusenAtom, getFusenIdsAtom, resetFusenAtom, setFusenAtom } from './fusen';
+import {
+	getFusenAtom,
+	getFusenIdsAtom,
+	resetFusenAtom,
+	setFusenAtom,
+	setFusensAtom,
+} from './fusen';
 
 describe('fusen test', () => {
 	const { result: setFusen } = renderHook(() => useSetAtom(setFusenAtom));
+	const { result: setFusens } = renderHook(() => useSetAtom(setFusensAtom));
 	const { result: resetFusen } = renderHook(() => useSetAtom(resetFusenAtom));
 
 	const test1 = { id: 'test1', title: 'test1', content: 'test1', position: { x: 0, y: 0 } };
@@ -54,5 +61,15 @@ describe('fusen test', () => {
 		expect(getFusenIds().current).toStrictEqual([]);
 		expect(getFusen(test1.id).current).toBe(null);
 		expect(getFusen(test2.id).current).toBe(null);
+	});
+
+	test('付箋をまとめてセットできる', () => {
+		act(() => {
+			setFusens.current([test1, test2]);
+		});
+
+		expect(getFusenIds().current).toStrictEqual([test1.id, test2.id]);
+		expect(getFusen(test1.id).current).toBe(test1);
+		expect(getFusen(test2.id).current).toBe(test2);
 	});
 });

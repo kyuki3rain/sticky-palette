@@ -12,7 +12,15 @@ export const getFusenIdsAtom = atom<string[]>((get) => [...get(fusenIdsAtom)]);
 
 export const setFusenAtom = atom(null, (get, set, fusen: FusenView) => {
 	set(fusensAtom(fusen.id), fusen);
-	set(fusenIdsAtom, (ids) => new Set(ids.add(fusen.id)));
+	set(fusenIdsAtom, (prev) => new Set(prev.add(fusen.id)));
+});
+
+export const setFusensAtom = atom(null, (get, set, fusens: FusenView[]) => {
+	const ids = fusens.map((fusen) => {
+		set(fusensAtom(fusen.id), fusen);
+		return fusen.id;
+	});
+	set(fusenIdsAtom, (prev) => new Set([...prev, ...ids]));
 });
 
 export const resetFusenAtom = atom(null, (get, set) => {
