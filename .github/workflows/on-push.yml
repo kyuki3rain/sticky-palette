@@ -3,6 +3,9 @@ on: push
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+      SUPABASE_ANON_KEY: ${{secrets.SUPABASE_URL}}
     steps:
     - uses: actions/checkout@v3
     - uses: pnpm/action-setup@v2
