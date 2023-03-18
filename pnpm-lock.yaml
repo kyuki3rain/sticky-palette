@@ -19,6 +19,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-draggable: ^4.4.5
+  react-zoom-pan-pinch: ^3.0.2
   rome: ^11.0.0
   supabase: ^1.42.7
   tailwindcss: ^3.2.7
@@ -35,6 +36,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.5_biqbaboplfbrettd7655fr4n2y
+  react-zoom-pan-pinch: 3.0.2_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@testing-library/dom': 9.0.1
@@ -2532,6 +2534,17 @@ packages:
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
+
+  /react-zoom-pan-pinch/3.0.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-c8BxPl/zK6RiOYrV/xBQ+ebgZpsMvbz6WOoqv2P/1QWxGCk1+q3xWF+5ub4QYasv4W8+J6vSelOR8H0WCEbL4w==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

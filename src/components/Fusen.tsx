@@ -6,9 +6,12 @@ import { useUpdateFusen } from '@/hooks/useUpdateFusen';
 
 type Props = {
 	id: string;
+	onDrag: (x: number, y: number) => void;
+	onStop: (x: number, y: number) => void;
+	scale: number;
 };
 
-export default function Fusen({ id }: Props) {
+export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 	const fusen = useAtomValue(getFusenAtom(id));
 	const { updateFusenPosition } = useUpdateFusen();
 	const nodeRef = useRef(null);
@@ -20,8 +23,11 @@ export default function Fusen({ id }: Props) {
 			defaultPosition={{ x: fusen.x, y: fusen.y }}
 			nodeRef={nodeRef}
 			onStop={(_, data) => {
+				onStop(data.x, data.y);
 				updateFusenPosition({ ...fusen, x: data.x, y: data.y });
 			}}
+			onDrag={(_, data) => onDrag(data.x, data.y)}
+			scale={scale}
 		>
 			<div
 				ref={nodeRef}

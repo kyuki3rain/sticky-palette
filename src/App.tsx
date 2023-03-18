@@ -18,11 +18,7 @@ function App() {
 		});
 	}, []);
 
-	return (
-		<div className="container" style={{ padding: '50px 0 100px 0' }}>
-			{!session ? <Auth /> : <Field key={session.user.id} />}
-		</div>
-	);
+	return <div className="container">{!session ? <Auth /> : <Field key={session.user.id} />}</div>;
 }
 
 export default App;
