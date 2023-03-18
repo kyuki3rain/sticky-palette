@@ -7,7 +7,7 @@ export default function Field() {
 
 	return (
 		<div className="relative w-full h-full">
-			{fusenIds.map((id) => (
+			{[...fusenIds].map((id) => (
 				<Fusen id={id} key={id} />
 			))}
 		</div>

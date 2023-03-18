@@ -1,5 +1,5 @@
 import Draggable from 'react-draggable';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { getFusenAtom } from '../states/fusen';
 import { useRef } from 'react';
 
@@ -8,8 +8,10 @@ type Props = {
 };
 
 export default function Fusen({ id }: Props) {
-	const [fusen] = useAtom(getFusenAtom(id));
+	const fusen = useAtomValue(getFusenAtom(id));
 	const nodeRef = useRef(null);
+
+	if (fusen === null) return <></>;
 
 	return (
 		<Draggable defaultPosition={fusen.position} nodeRef={nodeRef}>
