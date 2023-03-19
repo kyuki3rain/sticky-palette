@@ -30,3 +30,11 @@ export const resetFusenAtom = atom(null, (get, set) => {
 	}
 	set(fusenIdsAtom, new Set([]));
 });
+
+export const orderFusenIdAtom = atom(null, (get, set, id: string) => {
+	set(fusenIdsAtom, (prev) => {
+		prev.delete(id);
+		prev.add(id);
+		return new Set(prev);
+	});
+});

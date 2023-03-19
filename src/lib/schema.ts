@@ -30,6 +30,7 @@ export interface Database {
 		Tables: {
 			fusens: {
 				Row: {
+					color: string;
 					content: string;
 					id: string;
 					inserted_at: string;
@@ -40,6 +41,7 @@ export interface Database {
 					y: number;
 				};
 				Insert: {
+					color?: string;
 					content?: string;
 					id?: string;
 					inserted_at?: string;
@@ -50,6 +52,7 @@ export interface Database {
 					y?: number;
 				};
 				Update: {
+					color?: string;
 					content?: string;
 					id?: string;
 					inserted_at?: string;

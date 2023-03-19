@@ -18,13 +18,17 @@ export const useFetchFusen = () => {
 			setLoading(true);
 			const { user } = session;
 
-			let { data, error } = await supabase.from('fusens').select('*').eq('user_id', user.id);
+			let { data, error } = await supabase
+				.from('fusens')
+				.select('*')
+				.eq('user_id', user.id)
+				.order('updated_at', { ascending: true });
 
 			if (error) {
 				console.warn(error);
 			} else if (data) {
 				setFusens(data);
-				console.log(data);
+				console.log('fetch fusens');
 			}
 
 			setLoading(false);
