@@ -13,7 +13,7 @@ const Modal = () => {
 };
 
 const ModalView = () => {
-	const { createOrUpdateFusen } = useUpdateFusen();
+	const { createOrUpdateFusen, deleteFusenFromId } = useUpdateFusen();
 
 	const close = useSetAtom(closeModalAtom);
 	const params = useAtomValue(getModalParamsAtom);
@@ -74,16 +74,30 @@ const ModalView = () => {
 							type="button"
 							onClick={(e) => {
 								e.stopPropagation();
+								if (params.id) {
+									deleteFusenFromId(params.id);
+									close();
+								}
+							}}
+							className="border bg-red-500 text-white px-3 py-1 rounded-md mr-auto"
+						>
+							Delete
+						</button>
+						<button
+							type="button"
+							onClick={(e) => {
+								e.stopPropagation();
 								close();
 							}}
-							className="border border-gray-300 p-2 rounded-md"
+							className="border border-gray-300 px-3 py-1 rounded-md"
 						>
 							Cancel
 						</button>
 						<button
 							type="button"
-							className="bg-blue-500 text-white p-2 rounded-md"
-							onClick={() => {
+							className="bg-blue-500 text-white px-3 py-1 rounded-md"
+							onClick={(e) => {
+								e.stopPropagation();
 								createOrUpdateFusen(title, content, color, params.id);
 								close();
 							}}
