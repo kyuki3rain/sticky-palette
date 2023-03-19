@@ -14,6 +14,7 @@ export default function Field() {
 	const [fusenIds] = useAtom(getFusenIdsAtom);
 	const [isMoveable, setIsMoveable] = useState<boolean>(false);
 	const { height, width } = useWindowSize();
+	const { loading } = useFetchFusen();
 
 	const onDrag = useCallback(() => {
 		setIsMoveable(true);
@@ -21,6 +22,8 @@ export default function Field() {
 	const onStop = useCallback(() => {
 		setIsMoveable(false);
 	}, []);
+
+	if (loading) return <div>Loading...</div>;
 
 	return (
 		<>
