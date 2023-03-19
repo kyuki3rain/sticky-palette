@@ -46,9 +46,8 @@ function App() {
 						variables: {
 							default: {
 								colors: {
-									brand: ThemeSupa.default.colors?.brandAccent,
-									defaultButtonBackground: ThemeSupa.default.colors?.defaultButtonBackgroundHover,
-									inputBackground: '',
+									brandButtonText: ThemeSupa.default.colors?.brandAccent,
+									defaultButtonBackgroundHover: '#6b7280',
 								},
 							},
 						},
