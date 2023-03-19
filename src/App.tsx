@@ -34,7 +34,7 @@ function App() {
 						theme: ThemeSupa,
 						className: {
 							container: 'w-full max-w-sm md:max-w-md mx-auto',
-							button: 'hover:text-white bg-transparent',
+							button: 'hover:text-white',
 						},
 						style: {
 							container: {
@@ -46,6 +46,7 @@ function App() {
 							default: {
 								colors: {
 									brandButtonText: ThemeSupa.default.colors?.brandAccent,
+									brand: ThemeSupa.default.colors?.defaultButtonBackground,
 									defaultButtonBackgroundHover: '#6b7280',
 								},
 							},
