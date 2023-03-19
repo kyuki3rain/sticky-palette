@@ -34,7 +34,7 @@ function App() {
 						theme: ThemeSupa,
 						className: {
 							container: 'w-full max-w-sm md:max-w-md mx-auto',
-							button: 'hover:text-white',
+							button: 'hover:text-white bg-transparent',
 						},
 						style: {
 							container: {
