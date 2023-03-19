@@ -14,6 +14,7 @@ const MANIFEST = {
 		process.env.NODE_ENV === 'production' ? '' : ` (${process.env.NODE_ENV})`
 	}`,
 	display: 'standalone',
+	background_color: '#ffffff',
 	icons: [
 		{
 			src: 'windows11/SmallTile.scale-100.png',
