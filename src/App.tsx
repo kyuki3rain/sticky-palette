@@ -46,6 +46,7 @@ function App() {
 							default: {
 								colors: {
 									brandButtonText: ThemeSupa.default.colors?.brandAccent,
+									brand: ThemeSupa.default.colors?.defaultButtonBackground,
 									defaultButtonBackgroundHover: '#6b7280',
 								},
 							},
