@@ -29,7 +29,8 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 			nodeRef={nodeRef}
 			onStop={(_, data) => {
 				onStop();
-				updateFusenPosition({ ...fusen, x: data.x, y: data.y });
+				if (fusen.x !== data.x || fusen.y !== data.y)
+					updateFusenPosition({ ...fusen, x: data.x, y: data.y });
 			}}
 			onDrag={() => onDrag()}
 			onStart={() => orderFusen(id)}
