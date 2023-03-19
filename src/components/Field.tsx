@@ -30,7 +30,7 @@ export default function Field() {
 			<TransformWrapper
 				initialScale={1}
 				disabled={isMoveable}
-				minScale={0.5}
+				minScale={0.1}
 				maxScale={3}
 				initialPositionX={width / 2}
 				initialPositionY={height / 2}

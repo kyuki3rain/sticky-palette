@@ -1,7 +1,7 @@
 import Draggable from 'react-draggable';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { getFusenAtom, orderFusenIdAtom } from '../states/fusen';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useUpdateFusen } from '@/hooks/useUpdateFusen';
 import { getBGColor } from '@/const/colorTags';
 import { openModalAtom } from '@/states/modal';
@@ -19,6 +19,7 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 	const orderFusen = useSetAtom(orderFusenIdAtom);
 	const { updateFusenPosition } = useUpdateFusen();
 	const nodeRef = useRef(null);
+	const [touched, setTouched] = useState(false);
 
 	if (fusen === null) return <></>;
 
@@ -42,6 +43,14 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 				onDoubleClick={(e) => {
 					e.stopPropagation();
 					open(fusen);
+				}}
+				onTouchStart={(e) => {
+					e.stopPropagation();
+					if (touched) open(fusen);
+					else {
+						setTouched(true);
+						setTimeout(() => setTouched(false), 400);
+					}
 				}}
 			>
 				<div className="text-xl">{fusen.title}</div>
