@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/initSupabase';
-import { setFusenAtom } from '@/states/fusen';
+import { deleteFusenAtom, setFusenAtom } from '@/states/fusen';
 import { sessionAtom } from '@/states/session';
 import { Fusen } from '@/types/fusen';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 
 export const useUpdateFusen = () => {
 	const setFusen = useSetAtom(setFusenAtom);
+	const deleteFusen = useSetAtom(deleteFusenAtom);
 	const session = useAtomValue(sessionAtom);
 
 	const updateFusenPosition = useCallback((fusen: Fusen) => {
@@ -20,6 +21,17 @@ export const useUpdateFusen = () => {
 			.eq('id', fusen.id)
 			.then((res) => {
 				if (res.error) console.warn(res.error.message);
+			});
+	}, []);
+
+	const deleteFusenFromId = useCallback((id: string) => {
+		supabase
+			.from('fusens')
+			.delete()
+			.eq('id', id)
+			.then((res) => {
+				if (res.error) console.warn(res.error.message);
+				else deleteFusen(id);
 			});
 	}, []);
 
@@ -63,5 +75,6 @@ export const useUpdateFusen = () => {
 	return {
 		updateFusenPosition,
 		createOrUpdateFusen,
+		deleteFusenFromId,
 	};
 };

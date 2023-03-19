@@ -23,6 +23,15 @@ export const setFusensAtom = atom(null, (get, set, fusens: Fusen[]) => {
 	set(fusenIdsAtom, new Set(ids));
 });
 
+export const deleteFusenAtom = atom(null, (get, set, id: string) => {
+	set(fusensAtom(id), null);
+	fusensAtom.remove(id);
+	set(fusenIdsAtom, (prev) => {
+		prev.delete(id);
+		return new Set(prev);
+	});
+});
+
 export const resetFusenAtom = atom(null, (get, set) => {
 	for (const id of get(fusenIdsAtom)) {
 		set(fusensAtom(id), null);
