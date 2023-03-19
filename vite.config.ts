@@ -476,6 +476,9 @@ export default defineConfig({
 			devOptions: {
 				enabled: process.env.NODE_ENV === 'development',
 			},
+			workbox: {
+				globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+			},
 		}),
 	],
 	server: {
