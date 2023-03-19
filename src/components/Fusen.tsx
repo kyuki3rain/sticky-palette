@@ -8,8 +8,8 @@ import { openModalAtom } from '@/states/modal';
 
 type Props = {
 	id: string;
-	onDrag: (x: number, y: number) => void;
-	onStop: (x: number, y: number) => void;
+	onDrag: () => void;
+	onStop: () => void;
 	scale: number;
 };
 
@@ -24,13 +24,13 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 
 	return (
 		<Draggable
-			defaultPosition={{ x: fusen.x, y: fusen.y }}
+			defaultPosition={{ x: fusen.x - 128, y: fusen.y - 128 }}
 			nodeRef={nodeRef}
 			onStop={(_, data) => {
-				onStop(data.x, data.y);
+				onStop();
 				updateFusenPosition({ ...fusen, x: data.x, y: data.y });
 			}}
-			onDrag={(_, data) => onDrag(data.x, data.y)}
+			onDrag={() => onDrag()}
 			onStart={() => orderFusen(id)}
 			scale={scale}
 		>
