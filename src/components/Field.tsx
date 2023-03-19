@@ -2,7 +2,7 @@ import Fusen from './Fusen';
 import { useAtom } from 'jotai';
 import { getFusenIdsAtom } from '../states/fusen';
 import { useFetchFusen } from '@/hooks/useFetchFusen';
-import { TransformWrapper, TransformComponent, ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useCallback, useState } from 'react';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { supabase } from '@/lib/initSupabase';

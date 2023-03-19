@@ -5,7 +5,6 @@ import { useAtom } from 'jotai';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { sessionAtom } from './states/session';
-import { useFetchFusen } from './hooks/useFetchFusen';
 import { ja } from './const/ja';
 
 function App() {
