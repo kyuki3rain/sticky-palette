@@ -4,7 +4,8 @@ export type Fusen = Database['public']['Tables']['fusens']['Row'];
 
 export function createFusen(fusen: Partial<Fusen>): Fusen {
 	return {
-		color: fusen.color ?? '',
+		color: fusen.color ?? 'gray',
+		size: fusen.size ?? 'small',
 		id: fusen.id ?? '',
 		title: fusen.title ?? '',
 		content: fusen.content ?? '',

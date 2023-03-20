@@ -1,4 +1,5 @@
 import { COLOR_TAGS, getBGColor } from '@/const/colorTags';
+import { SIZE_TAGS } from '@/const/size';
 import { useUpdateFusen } from '@/hooks/useUpdateFusen';
 import { closeModalAtom, getModalParamsAtom, isOpenModalAtom } from '@/states/modal';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -20,6 +21,7 @@ const ModalView = () => {
 	const [title, setTitle] = useState(params.title ?? '');
 	const [content, setContent] = useState(params.content ?? '');
 	const [color, setColor] = useState(params.color ?? 'gray');
+	const [size, setSize] = useState(params.size ?? 'small');
 
 	return (
 		<div className='fixed top-0 left-0 w-full h-full block'>
@@ -51,23 +53,46 @@ const ModalView = () => {
 						onChange={(e) => setContent(e.currentTarget.value)}
 						className="border border-gray-300 p-2 rounded-md"
 					/>
-					<label htmlFor="color">Color:</label>
-					<div className="flex items-center space-x-2">
-						<select
-							id="color"
-							value={color}
-							onChange={(e) =>
-								setColor(COLOR_TAGS.find((color) => color === e.target.value) ?? 'gray')
-							}
-							className="border border-gray-300 p-2 rounded-md"
-						>
-							{COLOR_TAGS.map((color) => (
-								<option key={color} value={color}>
-									{color}
-								</option>
-							))}
-						</select>
-						<div className={`w-6 h-6 rounded-full ${getBGColor(color)}`} />
+					<div className="flex">
+						<div className="flex-1">
+							<label htmlFor="color">Color:</label>
+							<div className="flex items-center space-x-2">
+								<select
+									id="color"
+									value={color}
+									onChange={(e) =>
+										setColor(COLOR_TAGS.find((color) => color === e.target.value) ?? 'gray')
+									}
+									className="border border-gray-300 p-2 rounded-md"
+								>
+									{COLOR_TAGS.map((color) => (
+										<option key={color} value={color}>
+											{color}
+										</option>
+									))}
+								</select>
+								<div className={`w-6 h-6 rounded-full ${getBGColor(color)}`} />
+							</div>
+						</div>
+						<div className="flex-1">
+							<label htmlFor="size">Size:</label>
+							<div className="flex items-center space-x-2">
+								<select
+									id="size"
+									value={size}
+									onChange={(e) =>
+										setSize(SIZE_TAGS.find((size) => size === e.target.value) ?? 'small')
+									}
+									className="border border-gray-300 p-2 rounded-md"
+								>
+									{SIZE_TAGS.map((size) => (
+										<option key={size} value={size}>
+											{size}
+										</option>
+									))}
+								</select>
+							</div>
+						</div>
 					</div>
 					<div className="flex justify-end space-x-2 pt-4">
 						<button
@@ -98,7 +123,7 @@ const ModalView = () => {
 							className="bg-blue-500 text-white px-3 py-1 rounded-md"
 							onClick={(e) => {
 								e.stopPropagation();
-								createOrUpdateFusen(title, content, color, params.id);
+								createOrUpdateFusen({ title, content, color, size }, params.id);
 								close();
 							}}
 						>

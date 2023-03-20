@@ -1,10 +1,11 @@
 import Draggable from 'react-draggable';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { getFusenAtom, orderFusenIdAtom } from '../states/fusen';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useUpdateFusen } from '@/hooks/useUpdateFusen';
 import { getBGColor } from '@/const/colorTags';
 import { openModalAtom } from '@/states/modal';
+import { getSize } from '@/const/size';
 
 type Props = {
 	id: string;
@@ -23,14 +24,20 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 
 	if (fusen === null) return <></>;
 
+	const size = useMemo(() => getSize(fusen.size), [fusen]);
+
 	return (
 		<Draggable
-			defaultPosition={{ x: fusen.x - 128, y: fusen.y - 128 }}
+			defaultPosition={{ x: fusen.x - size.width / 2, y: fusen.y - size.height / 2 }}
 			nodeRef={nodeRef}
 			onStop={(_, data) => {
 				onStop();
 				if (fusen.x !== data.x || fusen.y !== data.y)
-					updateFusenPosition({ ...fusen, x: data.x + 128, y: data.y + 128 });
+					updateFusenPosition({
+						...fusen,
+						x: data.x + size.width / 2,
+						y: data.y + size.height / 2,
+					});
 			}}
 			onDrag={() => onDrag()}
 			onStart={() => orderFusen(id)}
@@ -38,7 +45,7 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 		>
 			<div
 				ref={nodeRef}
-				className={`absolute top-0 left-0 w-64 h-64 ${getBGColor(
+				className={`absolute top-0 left-0 ${size.widthCSS} ${size.heightCSS} ${getBGColor(
 					fusen.color,
 				)} rounded-md shadow-md px-2 py-1`}
 				onDoubleClick={(e) => {

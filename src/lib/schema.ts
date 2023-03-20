@@ -34,6 +34,7 @@ export interface Database {
 					content: string;
 					id: string;
 					inserted_at: string;
+					size: string;
 					title: string;
 					updated_at: string;
 					user_id: string;
@@ -45,6 +46,7 @@ export interface Database {
 					content?: string;
 					id?: string;
 					inserted_at?: string;
+					size?: string;
 					title?: string;
 					updated_at?: string;
 					user_id: string;
@@ -56,6 +58,7 @@ export interface Database {
 					content?: string;
 					id?: string;
 					inserted_at?: string;
+					size?: string;
 					title?: string;
 					updated_at?: string;
 					user_id?: string;
