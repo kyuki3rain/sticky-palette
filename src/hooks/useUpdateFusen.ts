@@ -1,9 +1,25 @@
+import { COLOR_TAGS } from '@/const/colorTags';
+import { SIZE_TAGS } from '@/const/size';
 import { supabase } from '@/lib/initSupabase';
 import { deleteFusenAtom, setFusenAtom } from '@/states/fusen';
 import { sessionAtom } from '@/states/session';
 import { Fusen } from '@/types/fusen';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
+
+type Params = {
+	title: string;
+	content: string;
+	color: string;
+	size: string;
+};
+
+const validateParams = (params: Params) => {
+	if (!COLOR_TAGS.includes(params.color)) return false;
+	if (!SIZE_TAGS.includes(params.size)) return false;
+
+	return true;
+};
 
 export const useUpdateFusen = () => {
 	const setFusen = useSetAtom(setFusenAtom);
@@ -36,12 +52,12 @@ export const useUpdateFusen = () => {
 	}, []);
 
 	const createFusen = useCallback(
-		(title: string, content: string, color: string) => {
+		(params: Params) => {
 			if (session === null) return;
 
 			supabase
 				.from('fusens')
-				.insert({ title, content, color, user_id: session.user.id })
+				.insert({ ...params, user_id: session.user.id })
 				.select()
 				.then((res) => {
 					if (res.error) console.warn(res.error.message);
@@ -51,10 +67,10 @@ export const useUpdateFusen = () => {
 		[session],
 	);
 
-	const updateFusen = useCallback((title: string, content: string, color: string, id: string) => {
+	const updateFusen = useCallback((params: Params, id: string) => {
 		supabase
 			.from('fusens')
-			.update({ title, content, color })
+			.update({ ...params })
 			.eq('id', id)
 			.select()
 			.then((res) => {
@@ -64,13 +80,12 @@ export const useUpdateFusen = () => {
 			});
 	}, []);
 
-	const createOrUpdateFusen = useCallback(
-		(title: string, content: string, color: string, id?: string) => {
-			if (id === undefined) createFusen(title, content, color);
-			else updateFusen(title, content, color, id);
-		},
-		[],
-	);
+	const createOrUpdateFusen = useCallback((params: Params, id?: string) => {
+		if (!validateParams(params)) return;
+
+		if (id === undefined) createFusen(params);
+		else updateFusen(params, id);
+	}, []);
 
 	return {
 		updateFusenPosition,

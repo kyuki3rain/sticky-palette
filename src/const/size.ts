@@ -1,4 +1,4 @@
-export const SIZE_TAG = ['small', 'large'];
+export const SIZE_TAGS = ['small', 'large'];
 
 export const getSize = (size_tag: string) => {
 	switch (size_tag) {
