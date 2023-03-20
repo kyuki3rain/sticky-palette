@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { VitePWA } from 'vite-plugin-pwa';
+import ViteRadar from 'vite-plugin-radar';
 
 const MANIFEST = {
 	name: `Sticky Palette${
