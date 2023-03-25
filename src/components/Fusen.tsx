@@ -62,7 +62,7 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 				}}
 			>
 				<div className="text-xl">{fusen.title}</div>
-				<div className="pt-1 break-words">{fusen.content}</div>
+				<div className="pt-1 break-words whitespace-pre-line">{fusen.content}</div>
 			</div>
 		</Draggable>
 	);
