@@ -1,3 +1,4 @@
+import Loading from '@/components/Loading';
 import { supabase } from '@/lib/initSupabase';
 import { sessionAtom, isPasswordResetAtom } from '@/states/session';
 import { useSetAtom } from 'jotai';
@@ -26,7 +27,7 @@ export default function AuthProvider({ children }: Props) {
 		});
 	}, []);
 
-	if (loading) return <></>;
+	if (loading) return <Loading />;
 
 	return <div>{children}</div>;
 }

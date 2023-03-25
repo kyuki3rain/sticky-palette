@@ -9,6 +9,7 @@ import { COLOR_TAGS } from '@/const/colorTags';
 import ColorTag from './ColorTag';
 import Modal from './Modal';
 import { getFusenIdsAtom } from '@/states/fusen';
+import Loading from '@/components/Loading';
 
 export default function Field() {
 	const [fusenIds] = useAtom(getFusenIdsAtom);
@@ -23,7 +24,7 @@ export default function Field() {
 		setIsMoveable(false);
 	}, []);
 
-	if (loading) return <div>Loading...</div>;
+	if (loading) return <Loading />;
 
 	return (
 		<>
