@@ -14,7 +14,7 @@ const Modal = () => {
 };
 
 const ModalView = () => {
-	const { createOrUpdateFusen, deleteFusenFromId } = useUpdateFusen();
+	const { createOrUpdateFusen, archiveFusen } = useUpdateFusen();
 
 	const close = useSetAtom(closeModalAtom);
 	const params = useAtomValue(getModalParamsAtom);
@@ -100,13 +100,13 @@ const ModalView = () => {
 							onClick={(e) => {
 								e.stopPropagation();
 								if (params.id) {
-									deleteFusenFromId(params.id);
+									archiveFusen(params.id);
 									close();
 								}
 							}}
 							className="border bg-red-500 text-white px-3 py-1 rounded-md mr-auto"
 						>
-							Delete
+							Archive
 						</button>
 						<button
 							type="button"

@@ -34,6 +34,7 @@ export interface Database {
 					content: string;
 					id: string;
 					inserted_at: string;
+					is_archived: boolean;
 					size: string;
 					title: string;
 					updated_at: string;
@@ -46,6 +47,7 @@ export interface Database {
 					content?: string;
 					id?: string;
 					inserted_at?: string;
+					is_archived?: boolean;
 					size?: string;
 					title?: string;
 					updated_at?: string;
@@ -58,6 +60,7 @@ export interface Database {
 					content?: string;
 					id?: string;
 					inserted_at?: string;
+					is_archived?: boolean;
 					size?: string;
 					title?: string;
 					updated_at?: string;

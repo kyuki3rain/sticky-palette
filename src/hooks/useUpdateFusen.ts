@@ -1,7 +1,7 @@
 import { COLOR_TAGS } from '@/const/colorTags';
 import { SIZE_TAGS } from '@/const/size';
 import { supabase } from '@/lib/initSupabase';
-import { deleteFusenAtom, setFusenAtom } from '@/states/fusen';
+import { removeFusenAtom, setFusenAtom } from '@/states/fusen';
 import { sessionAtom } from '@/states/session';
 import { Fusen } from '@/types/fusen';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -23,7 +23,7 @@ const validateParams = (params: Params) => {
 
 export const useUpdateFusen = () => {
 	const setFusen = useSetAtom(setFusenAtom);
-	const deleteFusen = useSetAtom(deleteFusenAtom);
+	const removeFusen = useSetAtom(removeFusenAtom);
 	const session = useAtomValue(sessionAtom);
 
 	const updateFusenPosition = useCallback((fusen: Fusen) => {
@@ -40,14 +40,14 @@ export const useUpdateFusen = () => {
 			});
 	}, []);
 
-	const deleteFusenFromId = useCallback((id: string) => {
+	const archiveFusen = useCallback((id: string) => {
 		supabase
 			.from('fusens')
-			.delete()
+			.update({ is_archived: true })
 			.eq('id', id)
 			.then((res) => {
 				if (res.error) console.warn(res.error.message);
-				else deleteFusen(id);
+				else removeFusen(id);
 			});
 	}, []);
 
@@ -90,6 +90,6 @@ export const useUpdateFusen = () => {
 	return {
 		updateFusenPosition,
 		createOrUpdateFusen,
-		deleteFusenFromId,
+		archiveFusen,
 	};
 };
