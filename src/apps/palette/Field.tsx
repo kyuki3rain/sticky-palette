@@ -1,6 +1,5 @@
 import Fusen from './Fusen';
 import { useAtom } from 'jotai';
-import { getFusenIdsAtom } from '../states/fusen';
 import { useFetchFusen } from '@/hooks/useFetchFusen';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useCallback, useState } from 'react';
@@ -9,6 +8,7 @@ import { supabase } from '@/lib/initSupabase';
 import { COLOR_TAGS } from '@/const/colorTags';
 import ColorTag from './ColorTag';
 import Modal from './Modal';
+import { getFusenIdsAtom } from '@/states/fusen';
 
 export default function Field() {
 	const [fusenIds] = useAtom(getFusenIdsAtom);
