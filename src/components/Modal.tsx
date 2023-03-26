@@ -14,7 +14,7 @@ const Modal = () => {
 };
 
 const ModalView = () => {
-	const { createOrUpdateFusen, archiveFusen } = useUpdateFusen();
+	const { createOrUpdateFusen, archiveFusen, deleteFusen } = useUpdateFusen();
 
 	const close = useSetAtom(closeModalAtom);
 	const params = useAtomValue(getModalParamsAtom);
@@ -95,19 +95,35 @@ const ModalView = () => {
 						</div>
 					</div>
 					<div className="flex justify-end space-x-2 pt-4">
-						<button
-							type="button"
-							onClick={(e) => {
-								e.stopPropagation();
-								if (params.id) {
-									archiveFusen(params.id);
-									close();
-								}
-							}}
-							className="border bg-red-500 text-white px-3 py-1 rounded-md mr-auto"
-						>
-							Archive
-						</button>
+						{params.is_archived ? (
+							<button
+								type="button"
+								onClick={(e) => {
+									e.stopPropagation();
+									if (params.id) {
+										deleteFusen(params.id);
+										close();
+									}
+								}}
+								className="border bg-red-500 text-white px-3 py-1 rounded-md mr-auto"
+							>
+								Delete
+							</button>
+						) : (
+							<button
+								type="button"
+								onClick={(e) => {
+									e.stopPropagation();
+									if (params.id) {
+										archiveFusen(params.id);
+										close();
+									}
+								}}
+								className="border bg-red-500 text-white px-3 py-1 rounded-md mr-auto"
+							>
+								Archive
+							</button>
+						)}
 						<button
 							type="button"
 							onClick={(e) => {

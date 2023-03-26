@@ -2,14 +2,15 @@ import { supabase } from '@/lib/initSupabase';
 import { userAtom } from '@/states/session';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { setFusensAtom } from '../states/fusen';
+import { setFusensAtom, setWithArchivedAtom } from '../states/fusen';
 
 type Props = {
-	withArchived?: boolean;
+	withArchived: boolean;
 };
 
 export const useFetchFusen = ({ withArchived }: Props = { withArchived: false }) => {
 	const setFusens = useSetAtom(setFusensAtom);
+	const setWithArchived = useSetAtom(setWithArchivedAtom);
 	const user = useAtomValue(userAtom);
 	const [loading, setLoading] = useState(false);
 
@@ -38,6 +39,7 @@ export const useFetchFusen = ({ withArchived }: Props = { withArchived: false })
 				console.warn(error);
 			} else if (data) {
 				setFusens(data);
+				setWithArchived(withArchived);
 				console.log('fetch fusens');
 			}
 

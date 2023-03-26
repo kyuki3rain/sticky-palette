@@ -4,9 +4,11 @@ import { Fusen } from '../types/fusen';
 
 const fusensAtom = atomFamily((id: string) => atom<Fusen | null>(null));
 const fusenIdsAtom = atom<Set<string>>(new Set([]));
+const fusenSearchAtom = atom({ withArchived: false });
 
 export const getFusenAtom = atomFamily((id: string) => atom((get) => get(fusensAtom(id))));
 export const getFusenIdsAtom = atom<string[]>((get) => [...get(fusenIdsAtom)]);
+export const getWithArchivedAtom = atom((get) => get(fusenSearchAtom).withArchived);
 
 export const setFusenAtom = atom(null, (get, set, fusen: Fusen) => {
 	set(fusensAtom(fusen.id), fusen);
@@ -44,4 +46,8 @@ export const orderFusenIdAtom = atom(null, (get, set, id: string) => {
 		prev.add(id);
 		return new Set(prev);
 	});
+});
+
+export const setWithArchivedAtom = atom(null, (get, set, withArchived: boolean) => {
+	set(fusenSearchAtom, { withArchived });
 });
