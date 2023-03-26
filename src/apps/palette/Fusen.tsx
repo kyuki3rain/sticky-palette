@@ -61,8 +61,10 @@ export default function Fusen({ id, onDrag, onStop, scale }: Props) {
 					}
 				}}
 			>
-				<div className="text-xl">{fusen.title}</div>
-				<div className="pt-1 break-words whitespace-pre-line">{fusen.content}</div>
+				<div className="line-clamp-1" style={{ WebkitLineClamp: 10 }}>
+					<div className="text-xl">{fusen.title}</div>
+					<div className="pt-1 break-words whitespace-pre-line">{fusen.content}</div>
+				</div>
 			</div>
 		</Draggable>
 	);
