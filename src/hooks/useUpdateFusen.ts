@@ -1,7 +1,12 @@
 import { COLOR_TAGS } from '@/const/colorTags';
 import { SIZE_TAGS } from '@/const/size';
 import { supabase } from '@/lib/initSupabase';
-import { removeFusenAtom, setFusenAtom } from '@/states/fusen';
+import {
+	getWithArchivedAtom,
+	orderFusenIdAtom,
+	removeFusenAtom,
+	setFusenAtom,
+} from '@/states/fusen';
 import { userAtom } from '@/states/session';
 import { Fusen } from '@/types/fusen';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -24,7 +29,9 @@ const validateParams = (params: Params) => {
 export const useUpdateFusen = () => {
 	const setFusen = useSetAtom(setFusenAtom);
 	const removeFusen = useSetAtom(removeFusenAtom);
+	const orderFusenId = useSetAtom(orderFusenIdAtom);
 	const user = useAtomValue(userAtom);
+	const withArchived = useAtomValue(getWithArchivedAtom);
 
 	const updateFusenPosition = useCallback((fusen: Fusen) => {
 		if (fusen.user_id === undefined) return;
@@ -45,6 +52,19 @@ export const useUpdateFusen = () => {
 			.from('fusens')
 			.update({ is_archived: true })
 			.eq('id', id)
+			.then((res) => {
+				if (res.error) console.warn(res.error.message);
+				else if (!withArchived) removeFusen(id);
+				else orderFusenId(id);
+			});
+	}, []);
+
+	const deleteFusen = useCallback((id: string) => {
+		supabase
+			.from('fusens')
+			.delete()
+			.eq('id', id)
+			.eq('is_archived', true)
 			.then((res) => {
 				if (res.error) console.warn(res.error.message);
 				else removeFusen(id);
@@ -91,5 +111,6 @@ export const useUpdateFusen = () => {
 		updateFusenPosition,
 		createOrUpdateFusen,
 		archiveFusen,
+		deleteFusen,
 	};
 };
