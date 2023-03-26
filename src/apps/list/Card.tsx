@@ -1,8 +1,8 @@
+import { getBGColor } from '@/const/colorTags';
 import { getFusenAtom } from '@/states/fusen';
 import { openModalAtom } from '@/states/modal';
 import { useAtomValue, useSetAtom } from 'jotai';
 import moment from 'moment';
-import { memo } from 'react';
 
 type Props = {
 	id: string;
@@ -23,7 +23,7 @@ export default function Card({ id }: Props) {
 			}}
 			onKeyDown={(e) => {}}
 		>
-			<span className="m-2 h-2 w-2 rounded-full bg-gray-400" />
+			<span className={`m-2 h-2 w-2 rounded-full ${getBGColor(fusen.color)}`} />
 			<div className="grow px-2 font-medium">
 				<div className="truncate">{fusen.title ?? fusen.content}</div>
 			</div>
