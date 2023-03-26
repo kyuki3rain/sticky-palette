@@ -16,10 +16,12 @@ specifiers:
   autoprefixer: ^10.4.14
   jotai: ^2.0.3
   jsdom: ^21.1.1
+  moment: ^2.29.4
   postcss: ^8.4.21
   react: ^18.2.0
   react-dom: ^18.2.0
   react-draggable: ^4.4.5
+  react-icons: ^4.8.0
   react-loader-spinner: ^5.3.4
   react-router-dom: ^6.9.0
   react-zoom-pan-pinch: ^3.0.2
@@ -38,9 +40,11 @@ dependencies:
   '@supabase/auth-ui-shared': 0.1.3_zdwm5ziqaueysmxlvh55ant57y
   '@supabase/supabase-js': 2.11.0
   jotai: 2.0.3_react@18.2.0
+  moment: 2.29.4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.5_biqbaboplfbrettd7655fr4n2y
+  react-icons: 4.8.0_react@18.2.0
   react-loader-spinner: 5.3.4_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.9.0_biqbaboplfbrettd7655fr4n2y
   react-zoom-pan-pinch: 3.0.2_biqbaboplfbrettd7655fr4n2y
@@ -3905,6 +3909,10 @@ packages:
       ufo: 1.1.1
     dev: true
 
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: false
+
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: false
@@ -4263,6 +4271,14 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-icons/4.8.0_react@18.2.0:
+    resolution: {integrity: sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

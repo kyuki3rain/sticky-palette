@@ -1,18 +1,27 @@
-import Main from '@/apps/auth/Main';
-import Field from '@/apps/palette/Field';
+import Auth from '@/apps/auth/Main';
+import Palette from '@/apps/palette/Main';
+import List from '@/apps/list/Main';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AuthGuardProvider from './AuthGuardPRovider';
 
 const router = createBrowserRouter([
 	{
 		path: '/auth',
-		element: <Main />,
+		element: <Auth />,
 	},
 	{
 		path: '/',
 		element: (
 			<AuthGuardProvider>
-				<Field />
+				<Palette />
+			</AuthGuardProvider>
+		),
+	},
+	{
+		path: '/list',
+		element: (
+			<AuthGuardProvider>
+				<List />
 			</AuthGuardProvider>
 		),
 	},

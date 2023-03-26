@@ -4,7 +4,11 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { setFusensAtom } from '../states/fusen';
 
-export const useFetchFusen = () => {
+type Props = {
+	withArchived?: boolean;
+};
+
+export const useFetchFusen = ({ withArchived }: Props = { withArchived: false }) => {
 	const setFusens = useSetAtom(setFusensAtom);
 	const user = useAtomValue(userAtom);
 	const [loading, setLoading] = useState(false);
@@ -17,12 +21,18 @@ export const useFetchFusen = () => {
 
 			setLoading(true);
 
-			let { data, error } = await supabase
-				.from('fusens')
-				.select('*')
-				.eq('user_id', user.id)
-				.eq('is_archived', false)
-				.order('updated_at', { ascending: true });
+			let { data, error } = withArchived
+				? await supabase
+						.from('fusens')
+						.select('*')
+						.eq('user_id', user.id)
+						.order('updated_at', { ascending: true })
+				: await supabase
+						.from('fusens')
+						.select('*')
+						.eq('user_id', user.id)
+						.eq('is_archived', false)
+						.order('updated_at', { ascending: true });
 
 			if (error) {
 				console.warn(error);

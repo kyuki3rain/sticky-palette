@@ -7,15 +7,18 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 import { supabase } from '@/lib/initSupabase';
 import { COLOR_TAGS } from '@/const/colorTags';
 import ColorTag from './ColorTag';
-import Modal from './Modal';
+import Modal from '../../components/Modal';
 import { getFusenIdsAtom } from '@/states/fusen';
 import Loading from '@/components/Loading';
+import { AiOutlineUnorderedList } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 export default function Field() {
 	const [fusenIds] = useAtom(getFusenIdsAtom);
 	const [isMoveable, setIsMoveable] = useState<boolean>(false);
 	const { height, width } = useWindowSize();
 	const { loading } = useFetchFusen();
+	const navigate = useNavigate();
 
 	const onDrag = useCallback(() => {
 		setIsMoveable(true);
@@ -66,6 +69,16 @@ export default function Field() {
 				))}
 			</div>
 			<Modal />
+			<button
+				onClick={(e) => {
+					e.preventDefault();
+					navigate('list');
+				}}
+				title="Contact Sale"
+				className="fixed bottom-10 right-8 z-10 flex h-16 w-16 items-center justify-center text-4xl rounded-full bg-blue-600 text-2xl sm:text-4xl sm:h-20 sm:w-20 text-white drop-shadow-lg hover:bg-blue-700 hover:drop-shadow-2xl"
+			>
+				<AiOutlineUnorderedList />
+			</button>
 		</>
 	);
 }
