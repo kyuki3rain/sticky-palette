@@ -1,12 +1,12 @@
 import { ja } from '@/const/ja';
 import { supabase } from '@/lib/initSupabase';
-import { isPasswordResetAtom } from '@/states/session';
+import { getIsPasswordResetAtom } from '@/states/session';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { useAtomValue } from 'jotai';
 
 export default function Main() {
-	const isPasswordReset = useAtomValue(isPasswordResetAtom);
+	const isPasswordReset = useAtomValue(getIsPasswordResetAtom);
 
 	return (
 		<Auth

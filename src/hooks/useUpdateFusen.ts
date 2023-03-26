@@ -2,7 +2,7 @@ import { COLOR_TAGS } from '@/const/colorTags';
 import { SIZE_TAGS } from '@/const/size';
 import { supabase } from '@/lib/initSupabase';
 import { removeFusenAtom, setFusenAtom } from '@/states/fusen';
-import { sessionAtom } from '@/states/session';
+import { userAtom } from '@/states/session';
 import { Fusen } from '@/types/fusen';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
@@ -24,7 +24,7 @@ const validateParams = (params: Params) => {
 export const useUpdateFusen = () => {
 	const setFusen = useSetAtom(setFusenAtom);
 	const removeFusen = useSetAtom(removeFusenAtom);
-	const session = useAtomValue(sessionAtom);
+	const user = useAtomValue(userAtom);
 
 	const updateFusenPosition = useCallback((fusen: Fusen) => {
 		if (fusen.user_id === undefined) return;
@@ -53,18 +53,18 @@ export const useUpdateFusen = () => {
 
 	const createFusen = useCallback(
 		(params: Params) => {
-			if (session === null) return;
+			if (user === null) return;
 
 			supabase
 				.from('fusens')
-				.insert({ ...params, user_id: session.user.id })
+				.insert({ ...params, user_id: user.id })
 				.select()
 				.then((res) => {
 					if (res.error) console.warn(res.error.message);
 					else if (res.data) setFusen(res.data[0]);
 				});
 		},
-		[session],
+		[user],
 	);
 
 	const updateFusen = useCallback((params: Params, id: string) => {
