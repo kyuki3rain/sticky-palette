@@ -51,6 +51,8 @@ const ModalView = () => {
 						id="content"
 						value={content}
 						onChange={(e) => setContent(e.currentTarget.value)}
+						cols={40}
+						rows={10}
 						className="border border-gray-300 p-2 rounded-md"
 					/>
 					<div className="flex">
