@@ -1,11 +1,11 @@
 import Draggable from 'react-draggable';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { getFusenAtom, orderFusenIdAtom } from '../states/fusen';
 import { useMemo, useRef, useState } from 'react';
 import { useUpdateFusen } from '@/hooks/useUpdateFusen';
 import { getBGColor } from '@/const/colorTags';
 import { openModalAtom } from '@/states/modal';
 import { getSize } from '@/const/size';
+import { getFusenAtom, orderFusenIdAtom } from '@/states/fusen';
 
 type Props = {
 	id: string;

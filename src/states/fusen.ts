@@ -3,11 +3,9 @@ import { atomFamily } from 'jotai/utils';
 import { Fusen } from '../types/fusen';
 
 const fusensAtom = atomFamily((id: string) => atom<Fusen | null>(null));
-
-export const getFusenAtom = atomFamily((id: string) => atom((get) => get(fusensAtom(id))));
-
 const fusenIdsAtom = atom<Set<string>>(new Set([]));
 
+export const getFusenAtom = atomFamily((id: string) => atom((get) => get(fusensAtom(id))));
 export const getFusenIdsAtom = atom<string[]>((get) => [...get(fusenIdsAtom)]);
 
 export const setFusenAtom = atom(null, (get, set, fusen: Fusen) => {
