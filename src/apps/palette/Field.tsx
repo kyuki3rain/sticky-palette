@@ -78,7 +78,7 @@ export default function Field() {
 					e.preventDefault();
 					navigate('list');
 				}}
-				title="Contact Sale"
+				title="to list"
 				className="fixed bottom-10 right-8 flex h-16 w-16 items-center justify-center text-4xl rounded-full bg-blue-600 text-2xl sm:text-4xl sm:h-20 sm:w-20 text-white drop-shadow-lg hover:bg-blue-700 hover:drop-shadow-2xl"
 			>
 				<AiOutlineUnorderedList />
