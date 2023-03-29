@@ -1,8 +1,8 @@
 import Fusen from './Fusen';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useFetchFusen } from '@/hooks/useFetchFusen';
-import { TransformWrapper, TransformComponent, ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
-import { useCallback, useRef, useState } from 'react';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { useCallback, useState } from 'react';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { supabase } from '@/lib/initSupabase';
 import { COLOR_TAGS } from '@/const/colorTags';
@@ -12,17 +12,15 @@ import { getFusenIdsAtom } from '@/states/fusen';
 import Loading from '@/components/Loading';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { setTransformRefAtom } from '@/states/transformRef';
+import { useTransformRef } from '@/hooks/useTransformRef';
 
 export default function Field() {
-	const ref = useRef<ReactZoomPanPinchRef | null>(null);
-	const setTransformRef = useSetAtom(setTransformRefAtom);
-
 	const [fusenIds] = useAtom(getFusenIdsAtom);
 	const [isMoveable, setIsMoveable] = useState<boolean>(false);
+	const navigate = useNavigate();
 	const { height, width } = useWindowSize();
 	const { loading } = useFetchFusen();
-	const navigate = useNavigate();
+	const { ref } = useTransformRef();
 
 	const onDrag = useCallback(() => {
 		setIsMoveable(true);
@@ -47,9 +45,6 @@ export default function Field() {
 					pinch={{ step: 5 }}
 					doubleClick={{ disabled: true }}
 					ref={ref}
-					onInit={() => {
-						setTransformRef(ref);
-					}}
 				>
 					{({ instance }) => (
 						<TransformComponent contentClass='main' wrapperStyle={{ height, width }}>
