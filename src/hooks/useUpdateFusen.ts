@@ -8,6 +8,7 @@ import {
 	setFusenAtom,
 } from '@/states/fusen';
 import { userAtom } from '@/states/session';
+import { getCenterPositionFnAtom } from '@/states/transformRef';
 import { Fusen } from '@/types/fusen';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
@@ -32,6 +33,7 @@ export const useUpdateFusen = () => {
 	const orderFusenId = useSetAtom(orderFusenIdAtom);
 	const user = useAtomValue(userAtom);
 	const withArchived = useAtomValue(getWithArchivedAtom);
+	const getCenterPosition = useAtomValue(getCenterPositionFnAtom);
 
 	const updateFusenPosition = useCallback((fusen: Fusen) => {
 		if (fusen.user_id === undefined) return;
@@ -75,9 +77,10 @@ export const useUpdateFusen = () => {
 		(params: Params) => {
 			if (user === null) return;
 
+			const position = getCenterPosition();
 			supabase
 				.from('fusens')
-				.insert({ ...params, user_id: user.id })
+				.insert({ ...params, user_id: user.id, ...position })
 				.select()
 				.then((res) => {
 					if (res.error) console.warn(res.error.message);
@@ -100,12 +103,15 @@ export const useUpdateFusen = () => {
 			});
 	}, []);
 
-	const createOrUpdateFusen = useCallback((params: Params, id?: string) => {
-		if (!validateParams(params)) return;
+	const createOrUpdateFusen = useCallback(
+		(params: Params, id?: string) => {
+			if (!validateParams(params)) return;
 
-		if (id === undefined) createFusen(params);
-		else updateFusen(params, id);
-	}, []);
+			if (id === undefined) createFusen(params);
+			else updateFusen(params, id);
+		},
+		[createFusen, updateFusen],
+	);
 
 	return {
 		updateFusenPosition,

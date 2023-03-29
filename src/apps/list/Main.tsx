@@ -27,17 +27,17 @@ export default function Main() {
 					</div>
 				</div>
 			</div>
-			<Modal />
 			<button
 				onClick={(e) => {
 					e.preventDefault();
 					navigate('/');
 				}}
-				title="Contact Sale"
+				title="to palette"
 				className="fixed bottom-10 right-8 z-10 flex h-16 w-16 items-center justify-center text-4xl rounded-full bg-blue-600 text-2xl sm:text-4xl sm:h-20 sm:w-20 text-white drop-shadow-lg hover:bg-blue-700 hover:drop-shadow-2xl"
 			>
 				<BsFillStickiesFill />
 			</button>
+			<Modal />
 		</div>
 	);
 }

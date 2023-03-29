@@ -12,7 +12,6 @@ export default function ColorTag({ color }: { color: string }) {
 			className={`${bgColor} w-16 h-16 rounded-md mt-2 hover:transition-transform hover:translate-x-4`}
 			onClick={(e) => {
 				e.stopPropagation();
-				console.log('sa');
 				open({ color });
 			}}
 			onKeyDown={(e) => {

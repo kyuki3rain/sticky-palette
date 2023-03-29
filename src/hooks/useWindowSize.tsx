@@ -1,11 +1,12 @@
-import { Size } from '@/types/size';
-import { useLayoutEffect, useState } from 'react';
+import { windowSizeAtom } from '@/states/windowSize';
+import { useAtom } from 'jotai';
+import { useLayoutEffect } from 'react';
 
 export const useWindowSize = () => {
-	const [size, setSize] = useState<Size>({ width: 0, height: 0 });
+	const [size, setWindowSize] = useAtom(windowSizeAtom);
 	useLayoutEffect(() => {
 		const updateSize = (): void => {
-			setSize({ width: window.innerWidth, height: window.innerHeight });
+			setWindowSize({ width: window.innerWidth, height: window.innerHeight });
 		};
 
 		window.addEventListener('resize', updateSize);
