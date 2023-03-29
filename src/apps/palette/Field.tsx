@@ -82,7 +82,7 @@ export default function Field() {
 					navigate('list');
 				}}
 				title="Contact Sale"
-				className="fixed bottom-10 right-8 z-10 flex h-16 w-16 items-center justify-center text-4xl rounded-full bg-blue-600 text-2xl sm:text-4xl sm:h-20 sm:w-20 text-white drop-shadow-lg hover:bg-blue-700 hover:drop-shadow-2xl"
+				className="fixed bottom-10 right-8 flex h-16 w-16 items-center justify-center text-4xl rounded-full bg-blue-600 text-2xl sm:text-4xl sm:h-20 sm:w-20 text-white drop-shadow-lg hover:bg-blue-700 hover:drop-shadow-2xl"
 			>
 				<AiOutlineUnorderedList />
 			</button>
